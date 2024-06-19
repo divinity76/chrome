@@ -58,13 +58,14 @@ abstract class AbstractBinaryInput
      * Get raw binary data.
      *
      * @param int|null $timeout
+     *
      * @return string
      */
     public function getRawBinary(int $timeout = null): string
     {
-        return base64_decode($this->getBase64($timeout), true);
+        return \base64_decode($this->getBase64($timeout), true);
     }
-    
+
     /**
      * Save data to the given file.
      *
@@ -100,7 +101,7 @@ abstract class AbstractBinaryInput
             }
         }
 
-        $file = \fopen($path, 'wb');
+        $file = \fopen($path, 'w');
         \stream_filter_append($file, 'convert.base64-decode');
         \fwrite($file, $response->getResultData('data'));
         \fclose($file);
